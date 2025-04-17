@@ -5,7 +5,7 @@ export default {
     },
     autoStart: false,
     instance: {
-      dbName: 'cdp-node-backend-template'
+      dbName: 'apha-integration-apoc-api'
     }
   },
   mongoURLEnvName: 'MONGO_URI',
