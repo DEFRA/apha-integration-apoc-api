@@ -6,12 +6,12 @@ import {
 const duals = [
   {
     method: 'GET',
-    path: '/dual',
+    path: '/api/dual',
     ...dualListController
   },
   {
     method: 'GET',
-    path: '/dual/{dualId}',
+    path: '/api/dual/{dualId}',
     ...dualController
   }
 ]
