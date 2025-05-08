@@ -10,6 +10,62 @@ const isProduction = process.env.NODE_ENV === 'production'
 const isTest = process.env.NODE_ENV === 'test'
 
 const config = convict({
+  // custom params here
+  oracleSAMDatabaseDetails: {
+    username: {
+      doc: 'SAM Database Username',
+      format: String,
+      nullable: false,
+      default: 'dummy',
+      env: 'ORACLEDB_SAM_USERNAME'
+    },
+    password: {
+      doc: 'SAM Database Password',
+      format: String,
+      nullable: false,
+      default: 'dummy',
+      env: 'ORACLEDB_SAM_PASSWORD'
+    },
+    host: {
+      doc: 'SAM Database host',
+      format: String,
+      nullable: false,
+      default: 'localhost',
+      env: 'ORACLEDB_SAM_HOST'
+    },
+    dbname: {
+      doc: 'SAM Database, Database name',
+      format: String,
+      nullable: false,
+      default: 'NONDB',
+      env: 'ORACLEDB_SAM_DBNAME'
+    },
+    poolMin: {
+      doc: 'SAM Database pool min',
+      format: Number,
+      default: 0,
+      env: 'ORACLEDB_SAM_POOL_MIN'
+    },
+    poolMax: {
+      doc: 'SAM Database pool max',
+      format: Number,
+      default: 1,
+      env: 'ORACLEDB_SAM_POOL_MAX'
+    },
+    poolTimeout: {
+      doc: 'SAM Database pool timeOut',
+      format: Number,
+      default: 60,
+      env: 'ORACLEDB_SAM_POOL_TIMEOUT'
+    },
+    poolCloseWaitTime: {
+      doc: 'SAM Database pool closing wait time',
+      format: Number,
+      default: 0,
+      env: 'ORACLEDB_SAM_POOL_CLOSE_WAIT_TIME'
+    }
+  },
+  // custom params above
   serviceVersion: {
     doc: 'The service version, this variable is injected into your docker container in CDP environments',
     format: String,

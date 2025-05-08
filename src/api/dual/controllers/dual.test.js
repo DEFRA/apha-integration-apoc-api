@@ -1,6 +1,10 @@
 import { dualController } from './dual'
 import Boom from '@hapi/boom'
 
+import { getDual } from '../helpers/get-dual.js'
+
+jest.mock('../helpers/get-dual.js')
+
 describe('dual controller', () => {
   const mockDual = 'Dual1'
   const mockRequest = {
@@ -17,7 +21,7 @@ describe('dual controller', () => {
   }
 
   const mockResponseData = {
-    dual: { dualID: mockDual }
+    dual: mockDual
   }
 
   beforeEach(() => {
@@ -27,6 +31,8 @@ describe('dual controller', () => {
   })
 
   test('should return dual data on success', async () => {
+    getDual.mockResolvedValue(mockDual)
+
     await dualController.handler(mockRequest, mockResponse)
 
     expect(mockResponse.response).toHaveBeenCalledWith({
@@ -38,7 +44,10 @@ describe('dual controller', () => {
   })
 
   test('should return 404 when not found', async () => {
+    getDual.mockResolvedValue()
+
     const failMockRequest = { ...mockRequest, params: { dualId: 'HAAAR' } }
+
     const value = await dualController.handler(failMockRequest, mockResponse)
 
     expect(value).toStrictEqual(Boom.boomify(Boom.notFound()))
