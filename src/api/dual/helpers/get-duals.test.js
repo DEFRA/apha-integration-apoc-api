@@ -1,15 +1,29 @@
 import { getDuals } from './get-duals.js'
+import oracledb from 'oracledb'
+
+jest.mock('oracledb', () => ({
+  getConnection: jest.fn()
+}))
 
 describe('get-duals', () => {
-  const mockdb = {}
+  let mockExecute
+  let mockClose
 
   beforeEach(() => {
+    jest.clearAllMocks()
+    mockClose = jest.fn().mockResolvedValue()
     jest.clearAllMocks()
   })
 
   test('should return list of duals', async () => {
-    const value = await getDuals(mockdb)
+    mockExecute = jest.fn().mockResolvedValue({ rows: [{ DUAL1: 'Dual1' }] })
+    oracledb.getConnection.mockResolvedValue({
+      execute: mockExecute,
+      close: mockClose
+    })
 
-    expect(value).toEqual([{ dualID: 'Dual1' }, { dualID: 'Dual2' }])
+    const value = await getDuals(oracledb)
+
+    expect(value).toEqual([{ DUAL1: 'Dual1' }])
   })
 })

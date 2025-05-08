@@ -1,6 +1,11 @@
 import { dualListController } from './list'
 
+import { getDuals } from '../helpers/get-duals.js'
+
+jest.mock('../helpers/get-duals.js')
+
 describe('Dual list controller', () => {
+  const mockDual = { DUALID: 'Dual1' }
   const mockRequest = {
     params: {},
     logger: {
@@ -15,7 +20,7 @@ describe('Dual list controller', () => {
   }
 
   const mockResponseData = {
-    duals: [{ dualID: 'Dual1' }, { dualID: 'Dual2' }]
+    duals: [mockDual]
   }
 
   beforeEach(() => {
@@ -25,6 +30,8 @@ describe('Dual list controller', () => {
   })
 
   test('should return dual list data on success', async () => {
+    getDuals.mockResolvedValue([mockDual])
+
     await dualListController.handler(mockRequest, mockResponse)
 
     expect(mockResponse.response).toHaveBeenCalledWith({
