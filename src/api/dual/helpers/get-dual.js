@@ -16,6 +16,12 @@ async function getDual(oracledb, dualID) {
       ? new URL(proxyConfig)
       : new URL('http://localhost:1234')
 
+    logger.warn(
+      `connectString: ${oracleSamDbConfig.host}/${oracleSamDbConfig.dbname}`
+    )
+    logger.warn(`proxyname: ${proxyUrl.hostname}`)
+    logger.warn(`proxyport: ${proxyUrl.port}`)
+
     connection = await oracledb.getConnection({
       user: oracleSamDbConfig.username ?? '',
       password: oracleSamDbConfig.password ?? '',
