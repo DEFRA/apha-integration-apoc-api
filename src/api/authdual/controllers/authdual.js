@@ -6,7 +6,7 @@ import { getDual } from '../../../oracledb-respositories/oracle-dual-repository.
 
 const { isNull } = lodash
 const { isUndefined } = lodash
-const dualController = {
+const authDualController = {
   handler: async (request, h) => {
     const dual = await getDual(oracledb, request.params.dualId)
 
@@ -18,4 +18,4 @@ const dualController = {
   }
 }
 
-export { dualController }
+export { authDualController }

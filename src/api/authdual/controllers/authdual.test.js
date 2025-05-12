@@ -1,11 +1,11 @@
-import { dualController } from './dual'
+import { authDualController } from './authdual'
 import Boom from '@hapi/boom'
 
 import { getDual } from '../../../oracledb-respositories/oracle-dual-repository.js'
 
 jest.mock('../../../oracledb-respositories/oracle-dual-repository.js')
 
-describe('dual controller', () => {
+describe('authdual controller', () => {
   const mockDual = 'Dual1'
   const mockRequest = {
     params: { dualId: mockDual },
@@ -33,7 +33,7 @@ describe('dual controller', () => {
   test('should return dual data on success', async () => {
     getDual.mockResolvedValue(mockDual)
 
-    await dualController.handler(mockRequest, mockResponse)
+    await authDualController.handler(mockRequest, mockResponse)
 
     expect(mockResponse.response).toHaveBeenCalledWith({
       message: 'success',
@@ -48,7 +48,10 @@ describe('dual controller', () => {
 
     const failMockRequest = { ...mockRequest, params: { dualId: 'HAAAR' } }
 
-    const value = await dualController.handler(failMockRequest, mockResponse)
+    const value = await authDualController.handler(
+      failMockRequest,
+      mockResponse
+    )
 
     expect(value).toStrictEqual(Boom.boomify(Boom.notFound()))
   })

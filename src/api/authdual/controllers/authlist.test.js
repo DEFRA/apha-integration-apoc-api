@@ -1,4 +1,4 @@
-import { dualListController } from './list'
+import { authDualListController } from './authlist'
 
 import { getDuals } from '../../../oracledb-respositories/oracle-dual-repository.js'
 
@@ -29,10 +29,10 @@ describe('Dual list controller', () => {
     mockResponse.response.mockReturnThis()
   })
 
-  test('should return dual list data on success', async () => {
+  test('should return authdual list data on success', async () => {
     getDuals.mockResolvedValue([mockDual])
 
-    await dualListController.handler(mockRequest, mockResponse)
+    await authDualListController.handler(mockRequest, mockResponse)
 
     expect(mockResponse.response).toHaveBeenCalledWith({
       message: 'success',
