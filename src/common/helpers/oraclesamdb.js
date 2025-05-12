@@ -2,6 +2,10 @@ import oracledb from 'oracledb'
 import { config } from '../../config.js'
 
 const oracleSamDbConfig = config.get('oracleSAMDatabaseDetails')
+const proxyConfig = config.get('httpProxy')
+const proxyUrl = proxyConfig
+  ? new URL(proxyConfig)
+  : new URL('http://localhost:1234')
 
 export const oracleSamDB = {
   plugin: {
@@ -15,6 +19,8 @@ export const oracleSamDB = {
           user: options.oracleConfig.username,
           password: options.oracleConfig.password,
           connectString: `${options.oracleConfig.host}/${options.oracleConfig.dbname}`,
+          httpsProxy: proxyUrl.hostname,
+          httpsProxyPort: +proxyUrl.port,
           poolMax: options.oracleConfig.poolMax,
           poolMin: options.oracleConfig.poolMin,
           poolTimeout: options.oracleConfig.poolTimeout // in seconds
