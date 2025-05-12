@@ -155,6 +155,8 @@ return await fetch(url, {
 })
 ```
 
+NOTE: We have removed the default proxy setup from this project, as it interferes with the oracledb connection strings. You will need to manually cconfigure the proxy in each connection for other http resources
+
 ## Docker
 
 ### Development image
