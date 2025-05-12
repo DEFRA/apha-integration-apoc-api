@@ -1,5 +1,4 @@
 import { createLogger } from '../../../common/helpers/logging/logger.js'
-import { config } from '../../../config.js'
 
 const logger = createLogger()
 
@@ -10,25 +9,7 @@ async function getDual(oracledb, dualID) {
 
   let connection
   try {
-    const oracleSamDbConfig = config.get('oracleSAMDatabaseDetails')
-    const proxyConfig = config.get('httpProxy')
-    const proxyUrl = proxyConfig
-      ? new URL(proxyConfig)
-      : new URL('http://localhost:1234')
-
-    logger.warn(
-      `connectString: ${oracleSamDbConfig.host}/${oracleSamDbConfig.dbname}`
-    )
-    logger.warn(`proxyname: ${proxyUrl.hostname}`)
-    logger.warn(`proxyport: ${proxyUrl.port}`)
-
-    connection = await oracledb.getConnection({
-      user: oracleSamDbConfig.username ?? '',
-      password: oracleSamDbConfig.password ?? '',
-      connectString: `${oracleSamDbConfig.host}/${oracleSamDbConfig.dbname}`,
-      httpsProxy: proxyUrl.hostname,
-      httpsProxyPort: +proxyUrl.port
-    })
+    connection = await oracledb.getConnection()
 
     const results = await connection.execute('SELECT :id FROM DUAL', [dualID], {
       maxRows: 1

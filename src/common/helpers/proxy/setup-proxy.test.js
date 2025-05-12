@@ -18,12 +18,14 @@ describe('setupProxy', () => {
     expect(undiciDispatcher).not.toBeInstanceOf(ProxyAgent)
   })
 
-  test('Should setup proxy if the environment variable is set', () => {
-    // config.set('httpProxy', 'http://localhost:8080')
-    // setupProxy()
-    // expect(global?.GLOBAL_AGENT?.HTTP_PROXY).toBe('http://localhost:8080')
-    // const undiciDispatcher = getGlobalDispatcher()
-    // expect(undiciDispatcher).toBeInstanceOf(ProxyAgent)
-    expect(true).not.toBe(false)
+  test('Should not setup proxy if the environment variable is set due to oracledb problems', () => {
+    config.set('httpProxy', null)
+    setupProxy()
+
+    expect(global?.GLOBAL_AGENT?.HTTP_PROXY).toBeUndefined()
+
+    const undiciDispatcher = getGlobalDispatcher()
+
+    expect(undiciDispatcher).not.toBeInstanceOf(ProxyAgent)
   })
 })
