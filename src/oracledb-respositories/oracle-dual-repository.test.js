@@ -15,7 +15,7 @@ describe('oracle-dual-repository', () => {
       jest.clearAllMocks()
     })
 
-    test('should return correct value throw dual call', async () => {
+    test('should return correct value via dual call', async () => {
       mockExecute = jest.fn().mockResolvedValue({ rows: [{ DUAL1: 'Dual1' }] })
       oracledb.getConnection.mockResolvedValue({
         execute: mockExecute,
