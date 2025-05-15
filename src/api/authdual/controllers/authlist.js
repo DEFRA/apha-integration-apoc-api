@@ -2,7 +2,7 @@ import { getDuals } from '../../../oracledb-respositories/oracle-dual-repository
 import { metricsCounter } from '../../../common/helpers/metrics.js'
 import oracledb from 'oracledb'
 
-const dualListController = {
+const authDualListController = {
   handler: async (request, h) => {
     const duals = await getDuals(oracledb)
     await metricsCounter('duals-list')
@@ -10,4 +10,4 @@ const dualListController = {
   }
 }
 
-export { dualListController }
+export { authDualListController }
