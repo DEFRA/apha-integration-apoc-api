@@ -12,7 +12,7 @@ async function getUnits(oracledb, countyID, parishID, holdingId) {
     connection = await oracledb.getConnection()
 
     const results = await connection.execute(
-      'Select * from ahbrp.v_cph_customer_unit where cph like',
+      'Select * from ahbrp.v_cph_customer_unit where cph like :cphid',
       [`${countyID}/${parishID}/${holdingId}`],
       {
         maxRows: 1

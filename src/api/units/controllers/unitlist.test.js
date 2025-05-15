@@ -56,4 +56,17 @@ describe('Units list controller', () => {
 
     expect(mockResponse.code).toHaveBeenCalledWith(200)
   })
+
+  test('should return nothing if repository returns undefined', async () => {
+    getUnits.mockResolvedValue(undefined)
+
+    await unitListController.handler(mockRequest, mockResponse)
+
+    expect(mockResponse.response).toHaveBeenCalledWith({
+      message: 'success',
+      ...undefined
+    })
+
+    expect(mockResponse.code).toHaveBeenCalledWith(200)
+  })
 })
