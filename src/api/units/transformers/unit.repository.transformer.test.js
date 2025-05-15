@@ -108,4 +108,22 @@ describe('Units transformer', () => {
 
     expect(value).toEqual(expected)
   })
+
+  test('should not fail when array is empty', async () => {
+    const payload = []
+    const expected = []
+
+    const value = transformRepositoryUnits(payload)
+
+    expect(value).toEqual(expected)
+  })
+
+  test('should not fail when payload us undefined', async () => {
+    const payload = undefined
+    const expected = undefined
+
+    const value = transformRepositoryUnits(payload)
+
+    expect(value).toEqual(expected)
+  })
 })
