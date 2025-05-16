@@ -19,6 +19,12 @@ const transformRepositoryUnits = (unitList) =>
               0,
               Math.min(2, current.organisation_name.length)
             ) + '*****'
+          : '*****',
+        property_number: current.property_number
+          ? current.property_number.substring(
+              0,
+              Math.min(2, current.property_number.length)
+            ) + '*****'
           : '*****'
       }))
     : undefined
