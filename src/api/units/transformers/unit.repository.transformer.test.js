@@ -10,6 +10,7 @@ describe('Units transformer', () => {
       person_family_name: 'Johansons',
       person_given_name: 'Gumbo',
       organisation_name: 'My long and interesting Org name',
+      property_number: '12 Feelings Lane',
       cph_type: 'PERMANENT'
     }
     defaultExpectedUnit = {
@@ -17,6 +18,7 @@ describe('Units transformer', () => {
       person_family_name: 'Jo*****',
       person_given_name: 'Gu*****',
       organisation_name: 'My*****',
+      property_number: '12*****',
       cph_type: 'PERMANENT'
     }
   })
@@ -54,7 +56,8 @@ describe('Units transformer', () => {
         cph: '42/091/0012',
         person_family_name: '*****',
         person_given_name: '*****',
-        organisation_name: '*****'
+        organisation_name: '*****',
+        property_number: '*****'
       }
     ]
 
@@ -69,7 +72,8 @@ describe('Units transformer', () => {
         ...defaultUnit,
         person_family_name: 'A',
         person_given_name: 'B',
-        organisation_name: 'C'
+        organisation_name: 'C',
+        property_number: 'D'
       }
     ]
     const expected = [
@@ -77,7 +81,8 @@ describe('Units transformer', () => {
         ...defaultExpectedUnit,
         person_family_name: 'A*****',
         person_given_name: 'B*****',
-        organisation_name: 'C*****'
+        organisation_name: 'C*****',
+        property_number: 'D*****'
       }
     ]
 
@@ -92,7 +97,8 @@ describe('Units transformer', () => {
         ...defaultUnit,
         person_family_name: '',
         person_given_name: '',
-        organisation_name: ''
+        organisation_name: '',
+        property_number: ''
       }
     ]
     const expected = [
@@ -100,7 +106,8 @@ describe('Units transformer', () => {
         ...defaultExpectedUnit,
         person_family_name: '*****',
         person_given_name: '*****',
-        organisation_name: '*****'
+        organisation_name: '*****',
+        property_number: '*****'
       }
     ]
 
