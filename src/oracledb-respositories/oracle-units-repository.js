@@ -15,7 +15,11 @@ async function getUnits(oracledb, countyID, parishID, holdingId) {
       'Select * from ahbrp.v_cph_customer_unit where cph like :cphid',
       [`${countyID}/${parishID}/${holdingId}`],
       {
-        maxRows: 1
+        outFormat: oracledb.OUT_FORMAT_OBJECT,
+        fetchTypeHandler: function (metaData) {
+          // Tells the database to return column names in lowercase
+          metaData.name = metaData.name.toLowerCase()
+        }
       }
     )
     result = results.rows
