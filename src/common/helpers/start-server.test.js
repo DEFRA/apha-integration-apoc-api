@@ -74,10 +74,14 @@ describe('#startServer', () => {
       )
       expect(mockHapiLoggerInfo).toHaveBeenNthCalledWith(
         5,
-        'Server started successfully'
+        'Setting up OraclePegadb'
       )
       expect(mockHapiLoggerInfo).toHaveBeenNthCalledWith(
         6,
+        'Server started successfully'
+      )
+      expect(mockHapiLoggerInfo).toHaveBeenNthCalledWith(
+        7,
         'Access your backend on http://localhost:3098'
       )
     })
