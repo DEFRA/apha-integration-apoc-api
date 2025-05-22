@@ -2,22 +2,22 @@ const transformRepositoryWorkschedule = (workscheduleList) =>
   workscheduleList
     ? workscheduleList.map((current, index) => ({
         ...current,
-        contactId: current.contactId
-          ? current.contactId.substring(
+        contactid: current.contactid
+          ? current.contactid.substring(
               0,
-              Math.min(2, current.contactId.length)
+              Math.min(2, current.contactid.length)
             ) + '*****'
           : '*****',
-        locationId: current.locationId
-          ? current.locationId.substring(
+        locationid: current.locationid
+          ? current.locationid.substring(
               0,
-              Math.min(2, current.locationId.length)
+              Math.min(2, current.locationid.length)
             ) + '*****'
           : '*****',
-        locationContactName: current.locationContactName
-          ? current.locationContactName.substring(
+        contactname: current.contactname
+          ? current.contactname.substring(
               0,
-              Math.min(2, current.locationContactName.length)
+              Math.min(2, current.contactname.length)
             ) + '*****'
           : '*****'
       }))
