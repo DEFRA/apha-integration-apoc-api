@@ -7,15 +7,15 @@ describe('WorkSchedule transformer', () => {
   beforeEach(() => {
     defaultWorkschedule = {
       countryCode: 'SCOTLAND', //pega_data.ahwork_ac.ukcountrycode
-      contactId: 'C165595', //pega_data.ahwork_ac.contactid
-      locationId: 'L159133', //pega_data.ahwork_ac.locationid
-      locationContactName: 'L159133' //pega_data.ahview_assign_workbasket_ac.contactname
+      contactid: 'C165595', //pega_data.ahwork_ac.contactid
+      locationid: 'L159133', //pega_data.ahwork_ac.locationid
+      contactname: 'L159133' //pega_data.ahview_assign_workbasket_ac.contactname
     }
     defaultExpectedWorkschedule = {
       countryCode: 'SCOTLAND', //pega_data.ahwork_ac.ukcountrycode
-      contactId: 'C1*****', //pega_data.ahwork_ac.contactid
-      locationId: 'L1*****', //pega_data.ahwork_ac.locationid
-      locationContactName: 'L1*****' //pega_data.ahview_assign_workbasket_ac.contactname
+      contactid: 'C1*****', //pega_data.ahwork_ac.contactid
+      locationid: 'L1*****', //pega_data.ahwork_ac.locationid
+      contactname: 'L1*****' //pega_data.ahview_assign_workbasket_ac.contactname
     }
   })
 
@@ -31,13 +31,13 @@ describe('WorkSchedule transformer', () => {
   test('should transform workschedule object when there is an array', async () => {
     const payload = [
       { ...defaultWorkschedule },
-      { ...defaultWorkschedule, locationId: 'AK98231233' },
-      { ...defaultWorkschedule, locationId: 'JO3454364376' }
+      { ...defaultWorkschedule, locationid: 'AK98231233' },
+      { ...defaultWorkschedule, locationid: 'JO3454364376' }
     ]
     const expected = [
       { ...defaultExpectedWorkschedule },
-      { ...defaultExpectedWorkschedule, locationId: 'AK*****' },
-      { ...defaultExpectedWorkschedule, locationId: 'JO*****' }
+      { ...defaultExpectedWorkschedule, locationid: 'AK*****' },
+      { ...defaultExpectedWorkschedule, locationid: 'JO*****' }
     ]
 
     const value = transformRepositoryWorkschedule(payload)
@@ -50,9 +50,9 @@ describe('WorkSchedule transformer', () => {
     const expected = [
       {
         countryCode: 'ENGLAND',
-        contactId: '*****',
-        locationId: '*****',
-        locationContactName: '*****'
+        contactid: '*****',
+        locationid: '*****',
+        contactname: '*****'
       }
     ]
 
@@ -65,17 +65,17 @@ describe('WorkSchedule transformer', () => {
     const payload = [
       {
         ...defaultWorkschedule,
-        contactId: 'A',
-        locationId: 'B',
-        locationContactName: 'C'
+        contactid: 'A',
+        locationid: 'B',
+        contactname: 'C'
       }
     ]
     const expected = [
       {
         ...defaultExpectedWorkschedule,
-        contactId: 'A*****',
-        locationId: 'B*****',
-        locationContactName: 'C*****'
+        contactid: 'A*****',
+        locationid: 'B*****',
+        contactname: 'C*****'
       }
     ]
 
@@ -88,17 +88,17 @@ describe('WorkSchedule transformer', () => {
     const payload = [
       {
         ...defaultWorkschedule,
-        contactId: '',
-        locationId: '',
-        locationContactName: ''
+        contactid: '',
+        locationid: '',
+        contactname: ''
       }
     ]
     const expected = [
       {
         ...defaultExpectedWorkschedule,
-        contactId: '*****',
-        locationId: '*****',
-        locationContactName: '*****'
+        contactid: '*****',
+        locationid: '*****',
+        contactname: '*****'
       }
     ]
 
