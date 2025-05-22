@@ -10,6 +10,7 @@ import { pulse } from './common/helpers/pulse.js'
 import { requestTracing } from './common/helpers/request-tracing.js'
 import { setupProxy } from './common/helpers/proxy/setup-proxy.js'
 import { oracleSamDB } from './common/helpers/oraclesamdb.js'
+import { oraclePegaDB } from './common/helpers/oraclepegadb.js'
 
 async function createServer() {
   setupProxy()
@@ -54,6 +55,7 @@ async function createServer() {
     pulse,
     mongoDb,
     oracleSamDB,
+    oraclePegaDB,
     router
   ])
 

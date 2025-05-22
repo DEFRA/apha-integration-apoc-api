@@ -71,6 +71,66 @@ const config = convict({
       env: 'ORACLEDB_SAM_POOL_ALIAS'
     }
   },
+  oraclePEGADatabaseDetails: {
+    username: {
+      doc: 'PEGA Database Username',
+      format: String,
+      nullable: false,
+      default: 'dummy',
+      env: 'ORACLEDB_PEGA_USERNAME'
+    },
+    password: {
+      doc: 'PEGA Database Password',
+      format: String,
+      nullable: false,
+      default: 'dummy',
+      env: 'ORACLEDB_PEGA_PASSWORD'
+    },
+    host: {
+      doc: 'PEGA Database host',
+      format: String,
+      nullable: false,
+      default: 'localhost',
+      env: 'ORACLEDB_PEGA_HOST'
+    },
+    dbname: {
+      doc: 'PEGA Database, Database name',
+      format: String,
+      nullable: false,
+      default: 'NONDB',
+      env: 'ORACLEDB_PEGA_DBNAME'
+    },
+    poolMin: {
+      doc: 'PEGA Database pool min',
+      format: Number,
+      default: 0,
+      env: 'ORACLEDB_PEGA_POOL_MIN'
+    },
+    poolMax: {
+      doc: 'PEGA Database pool max',
+      format: Number,
+      default: 1,
+      env: 'ORACLEDB_PEGA_POOL_MAX'
+    },
+    poolTimeout: {
+      doc: 'PEGA Database pool timeOut',
+      format: Number,
+      default: 60,
+      env: 'ORACLEDB_PEGA_POOL_TIMEOUT'
+    },
+    poolCloseWaitTime: {
+      doc: 'PEGA Database pool closing wait time',
+      format: Number,
+      default: 0,
+      env: 'ORACLEDB_PEGA_POOL_CLOSE_WAIT_TIME'
+    },
+    poolAlias: {
+      doc: 'PEGA Database pool alias name',
+      format: String,
+      default: 'pegaPool',
+      env: 'ORACLEDB_PEGA_POOL_ALIAS'
+    }
+  },
   // custom params above
   serviceVersion: {
     doc: 'The service version, this variable is injected into your docker container in CDP environments',
