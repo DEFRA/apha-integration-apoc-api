@@ -23,7 +23,8 @@ export const oracleSamDB = {
           httpsProxyPort: +proxyUrl.port,
           poolMax: options.oracleConfig.poolMax,
           poolMin: options.oracleConfig.poolMin,
-          poolTimeout: options.oracleConfig.poolTimeout // in seconds
+          poolTimeout: options.oracleConfig.poolTimeout, // in seconds
+          poolAlias: options.oracleConfig.poolAlias
         })
       } catch (err) {
         server.logger.error(err)
@@ -32,7 +33,9 @@ export const oracleSamDB = {
       server.events.on('stop', async () => {
         server.logger.info('Closing Oracle SAM Pool')
         try {
-          await oracledb.getPool().close(options.oracleConfig.poolCloseWaitTime)
+          await oracledb
+            .getPool(options.oracleConfig.poolAlias)
+            .close(options.oracleConfig.poolCloseWaitTime)
         } catch (err) {
           server.logger.info(err)
         }

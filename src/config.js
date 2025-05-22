@@ -63,6 +63,12 @@ const config = convict({
       format: Number,
       default: 0,
       env: 'ORACLEDB_SAM_POOL_CLOSE_WAIT_TIME'
+    },
+    poolAlias: {
+      doc: 'SAM Database pool alias name',
+      format: String,
+      default: 'samPool',
+      env: 'ORACLEDB_SAM_POOL_ALIAS'
     }
   },
   // custom params above
