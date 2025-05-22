@@ -1,4 +1,7 @@
 import { createLogger } from '../common/helpers/logging/logger.js'
+import { config } from '../config.js'
+
+const poolAlias = config.get('oracleSAMDatabaseDetails').poolAlias
 
 const logger = createLogger()
 const columnNames =
@@ -11,7 +14,7 @@ async function getUnits(oracledb, countyID, parishID, holdingId) {
     logger.info(
       `Making oracledb request for ${countyID}/${parishID}/${holdingId}`
     )
-    connection = await oracledb.getConnection()
+    connection = await oracledb.getConnection(poolAlias)
 
     const results = await connection.execute(
       'Select ' +

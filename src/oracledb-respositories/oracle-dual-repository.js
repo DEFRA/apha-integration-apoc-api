@@ -1,6 +1,8 @@
 import { createLogger } from '../common/helpers/logging/logger.js'
+import { config } from '../config.js'
 
 const logger = createLogger()
+const poolAlias = config.get('oracleSAMDatabaseDetails').poolAlias
 
 async function getDual(oracledb, dualID) {
   let result
@@ -9,7 +11,7 @@ async function getDual(oracledb, dualID) {
 
   let connection
   try {
-    connection = await oracledb.getConnection()
+    connection = await oracledb.getConnection(poolAlias)
 
     const results = await connection.execute('SELECT :id FROM DUAL', [dualID], {
       maxRows: 1
@@ -33,7 +35,7 @@ async function getDuals(oracledb) {
   let result
   let connection
   try {
-    connection = await oracledb.getConnection()
+    connection = await oracledb.getConnection(poolAlias)
 
     const results = await connection.execute(
       'SELECT :id FROM DUAL',

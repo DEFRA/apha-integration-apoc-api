@@ -17,7 +17,7 @@ describe('oracle-dual-repository', () => {
 
     test('should return correct value via dual call', async () => {
       mockExecute = jest.fn().mockResolvedValue({ rows: [{ DUAL1: 'Dual1' }] })
-      oracledb.getConnection.mockResolvedValue({
+      const mockConnect = oracledb.getConnection.mockResolvedValue({
         execute: mockExecute,
         close: mockClose
       })
@@ -25,6 +25,7 @@ describe('oracle-dual-repository', () => {
       const value = await getDual(oracledb, 'Dual1')
 
       expect(value).toEqual({ DUAL1: 'Dual1' })
+      expect(mockConnect).toHaveBeenCalledWith('samPool')
     })
 
     test('should return Dual2', async () => {
@@ -32,7 +33,7 @@ describe('oracle-dual-repository', () => {
         .fn()
         .mockResolvedValue({ rows: [{ DUAL2: 'Dual2' }] })
       const mockClose = jest.fn().mockResolvedValue()
-      oracledb.getConnection.mockResolvedValue({
+      const mockConnect = oracledb.getConnection.mockResolvedValue({
         execute: mockExecute,
         close: mockClose
       })
@@ -40,6 +41,7 @@ describe('oracle-dual-repository', () => {
       const value = await getDual(oracledb, 'Dual2')
 
       expect(value).toEqual({ DUAL2: 'Dual2' })
+      expect(mockConnect).toHaveBeenCalledWith('samPool')
     })
 
     test('should return empty when not found', async () => {
@@ -61,7 +63,7 @@ describe('oracle-dual-repository', () => {
 
     test('should return list of duals', async () => {
       mockExecute = jest.fn().mockResolvedValue({ rows: [{ DUAL1: 'Dual1' }] })
-      oracledb.getConnection.mockResolvedValue({
+      const mockConnect = oracledb.getConnection.mockResolvedValue({
         execute: mockExecute,
         close: mockClose
       })
@@ -69,6 +71,7 @@ describe('oracle-dual-repository', () => {
       const value = await getDuals(oracledb)
 
       expect(value).toEqual([{ DUAL1: 'Dual1' }])
+      expect(mockConnect).toHaveBeenCalledWith('samPool')
     })
   })
 })

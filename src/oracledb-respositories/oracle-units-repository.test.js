@@ -17,7 +17,7 @@ describe('get-units', () => {
 
   test('should return list of units', async () => {
     mockExecute = jest.fn().mockResolvedValue({ rows: [{ UNITS: 'UNITS' }] })
-    oracledb.getConnection.mockResolvedValue({
+    const mockConnect = oracledb.getConnection.mockResolvedValue({
       execute: mockExecute,
       close: mockClose
     })
@@ -25,5 +25,6 @@ describe('get-units', () => {
     const value = await getUnits(oracledb, '42', '091', '0113')
 
     expect(value).toEqual([{ UNITS: 'UNITS' }])
+    expect(mockConnect).toHaveBeenCalledWith('samPool')
   })
 })
